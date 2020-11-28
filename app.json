@@ -1,0 +1,26 @@
+{
+  "id": "b6201190-65f1-4793-be9c-1cb6dc17c8c7",
+  "name": "Import Attachment-API",
+  "publisher": "Saurav Dhyani",
+  "version": "17.0.0.0",
+  "brief": "This extension is an example of Uploading Attachment via API.",
+  "description": "How to import/export data in Businsess Central SaaS/on-prem using Blob.",
+  "privacyStatement": "https://www.sauravdhyani.com",
+  "EULA": "https://www.sauravdhyani.com",
+  "help": "https://www.sauravdhyani.com",
+  "url": "https://www.sauravdhyani.com",
+  "logo": "image/Logo.png",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "17.0.0.0",
+  "application": "17.0.0.0",
+  "idRanges": [
+    {
+      "from": 50001,
+      "to": 50003
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://APIExample.com/help/",
+  "showMyCode": true,
+  "runtime": "6.0"
+}

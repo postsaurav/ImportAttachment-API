@@ -1,0 +1,6 @@
+*rad.json
+*.app
+*launch.json
+/ImportAttachment-API/.alpackages
+/ImportAttachment-API/.snapshots
+/ImportAttachment-API/.vscode/.alcache
