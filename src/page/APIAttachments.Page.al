@@ -31,6 +31,18 @@ page 50003 "SDH API Attachments"
     {
         area(Processing)
         {
+            action("Export Attachment")
+            {
+                ApplicationArea = All;
+                Caption = 'Download Attachment';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Export;
+                trigger OnAction()
+                begin
+                    rec.ExportAttachment();
+                end;
+            }
         }
     }
 }

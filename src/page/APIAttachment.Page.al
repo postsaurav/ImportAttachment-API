@@ -42,6 +42,31 @@ page 50001 "SDH API Attachment"
     {
         area(Processing)
         {
+            action("Convert To Blob")
+            {
+                ApplicationArea = All;
+                Caption = 'Convert To Blob';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Import;
+                trigger OnAction()
+                begin
+                    Rec.ImportAttachment(TextValue);
+                    Message('Attachment Uploaded');
+                end;
+            }
+            action("Export Attachment")
+            {
+                ApplicationArea = All;
+                Caption = 'Download Attachment';
+                Promoted = true;
+                PromotedCategory = Process;
+                Image = Export;
+                trigger OnAction()
+                begin
+                    rec.ExportAttachment();
+                end;
+            }
         }
     }
     var
