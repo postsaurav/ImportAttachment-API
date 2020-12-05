@@ -1,9 +1,9 @@
 page 50002 APIAttachment
 {
     PageType = API;
-    Caption = 'apiattachment';
+    Caption = 'apiattachments';
     APIVersion = 'v1.0';
-    APIPublisher = 'bcopendiscussion';
+    APIPublisher = 'sauravdhyani';
     APIGroup = 'demo';
     EntityName = 'apiattachment';
     EntitySetName = 'apiattachments';

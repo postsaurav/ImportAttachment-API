@@ -25,6 +25,18 @@ table 50001 "SDH API Attachment"
             Clustered = true;
         }
     }
+
+    procedure ImportAttachmentOldWay(Textvalue: Text)
+    var
+        Tempblob: Record TempBlob;
+    begin
+        If Textvalue = '' Then
+            exit;
+        Tempblob.Init();
+        Tempblob.FromBase64String(Textvalue);
+        Rec.Attachment := Tempblob.Blob;
+    end;
+
     procedure ImportAttachment(Textvalue: Text)
     var
         Base64Convert: Codeunit "Base64 Convert";

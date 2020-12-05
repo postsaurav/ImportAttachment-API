@@ -52,6 +52,7 @@ page 50001 "SDH API Attachment"
                 trigger OnAction()
                 begin
                     Rec.ImportAttachment(TextValue);
+                    //Rec.ImportAttachmentOldWay(TextValue);
                     Message('Attachment Uploaded');
                 end;
             }
