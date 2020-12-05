@@ -26,30 +26,30 @@ table 50001 "SDH API Attachment"
         }
     }
 
-    procedure ImportAttachmentOldWay(Textvalue: Text)
+    procedure ImportAttachmentOldWay(Bit64InputValue: Text)
     var
         Tempblob: Record TempBlob;
     begin
-        If Textvalue = '' Then
+        If Bit64InputValue = '' Then
             exit;
         Tempblob.Init();
-        Tempblob.FromBase64String(Textvalue);
+        Tempblob.FromBase64String(Bit64InputValue);
         Rec.Attachment := Tempblob.Blob;
     end;
 
-    procedure ImportAttachment(Textvalue: Text)
+    procedure ImportAttachment(Bit64InputValue: Text)
     var
         Base64Convert: Codeunit "Base64 Convert";
         TempBlob: Codeunit "Temp Blob";
         TempOutstream: OutStream;
         Recref: RecordRef;
     begin
-        If Textvalue = '' Then
+        If Bit64InputValue = '' Then
             exit;
         Recref.Open(Database::"SDH API Attachment");
         Recref.GetTable(Rec);
         TempBlob.CreateOutStream(TempOutstream);
-        Base64Convert.FromBase64(Textvalue, TempOutstream);
+        Base64Convert.FromBase64(Bit64InputValue, TempOutstream);
 
         TempBlob.ToRecordRef(Recref, Rec.FieldNo(Attachment));
         Recref.SetTable(Rec);
