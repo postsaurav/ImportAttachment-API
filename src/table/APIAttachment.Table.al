@@ -68,4 +68,20 @@ table 50001 "SDH API Attachment"
         Rec.Attachment.CreateInStream(IStream);
         DownloadFromStream(IStream, '', '', '', ExportFileName);
     end;
+
+    procedure ConvertedTo64Value(): Text
+    var
+        Base64Convert: Codeunit "Base64 Convert";
+        TempInStream: InStream;
+        TempBlob: Codeunit "Temp Blob";
+        Recref: RecordRef;
+    begin
+        Recref.Open(Database::"SDH API Attachment");
+        Recref.GetTable(Rec);
+        TempBlob.FromRecordRef(RecRef, Rec.FieldNo(Attachment));
+        TempBlob.CreateInStream(TempInStream);
+        Recref.SetTable(Rec);
+        Recref.Close();
+        Exit(Base64Convert.ToBase64(TempInStream));
+    end;
 }

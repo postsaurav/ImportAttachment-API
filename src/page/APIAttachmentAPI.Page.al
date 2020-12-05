@@ -48,9 +48,20 @@ page 50002 APIAttachment
                             Error('No Bith 64 value.');
                     end;
                 }
+                field(Out64bitValue; Out64bitValue)
+                {
+                    ApplicationArea = All;
+                    Caption = '64-Bit Out';
+                }
             }
         }
     }
     var
         In64bitValue: Text;
+        Out64bitValue: Text;
+
+    trigger OnAfterGetRecord()
+    begin
+        Out64bitValue := Rec.ConvertedTo64Value();
+    end;
 }
