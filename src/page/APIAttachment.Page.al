@@ -15,7 +15,7 @@ page 50001 "SDH API Attachment"
                     Caption = 'Code';
                     ToolTip = 'Stores the Code.';
                 }
-                field("Base 64 Value"; TextValue)
+                field("Base 64 Value"; Bit64TextValue)
                 {
                     ApplicationArea = All;
                     Caption = 'Base 64 Value';
@@ -51,7 +51,8 @@ page 50001 "SDH API Attachment"
                 Image = Import;
                 trigger OnAction()
                 begin
-                    Rec.ImportAttachment(TextValue);
+                    Rec.ImportAttachment(Bit64TextValue);
+                    //Rec.ImportAttachmentOldWay(Bit64TextValue);
                     Message('Attachment Uploaded');
                 end;
             }
@@ -70,5 +71,5 @@ page 50001 "SDH API Attachment"
         }
     }
     var
-        TextValue: Text;
+        Bit64TextValue: Text;
 }

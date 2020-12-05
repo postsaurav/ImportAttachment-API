@@ -1,9 +1,9 @@
 page 50002 APIAttachment
 {
     PageType = API;
-    Caption = 'apiattachment';
+    Caption = 'apiattachments';
     APIVersion = 'v1.0';
-    APIPublisher = 'bcopendiscussion';
+    APIPublisher = 'sauravdhyani';
     APIGroup = 'demo';
     EntityName = 'apiattachment';
     EntitySetName = 'apiattachments';
@@ -33,7 +33,7 @@ page 50002 APIAttachment
                     ApplicationArea = All;
                     Caption = 'File Extension';
                 }
-                field(InputText; InputText)
+                field(In64bitValue; In64bitValue)
                 {
                     ApplicationArea = All;
                     Caption = 'Bit64';
@@ -42,15 +42,26 @@ page 50002 APIAttachment
                     var
                         myInt: Integer;
                     begin
-                        IF InputText <> '' THEN
-                            Rec.ImportAttachment(InputText)
+                        IF In64bitValue <> '' THEN
+                            Rec.ImportAttachment(In64bitValue)
                         Else
                             Error('No Bith 64 value.');
                     end;
+                }
+                field(Out64bitValue; Out64bitValue)
+                {
+                    ApplicationArea = All;
+                    Caption = '64-Bit Out';
                 }
             }
         }
     }
     var
-        InputText: Text;
+        In64bitValue: Text;
+        Out64bitValue: Text;
+
+    trigger OnAfterGetRecord()
+    begin
+        Out64bitValue := Rec.ConvertedTo64Value();
+    end;
 }

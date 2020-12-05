@@ -25,19 +25,31 @@ table 50001 "SDH API Attachment"
             Clustered = true;
         }
     }
-    procedure ImportAttachment(Textvalue: Text)
+
+    procedure ImportAttachmentOldWay(Bit64InputValue: Text)
+    var
+        Tempblob: Record TempBlob;
+    begin
+        If Bit64InputValue = '' Then
+            exit;
+        Tempblob.Init();
+        Tempblob.FromBase64String(Bit64InputValue);
+        Rec.Attachment := Tempblob.Blob;
+    end;
+
+    procedure ImportAttachment(Bit64InputValue: Text)
     var
         Base64Convert: Codeunit "Base64 Convert";
         TempBlob: Codeunit "Temp Blob";
         TempOutstream: OutStream;
         Recref: RecordRef;
     begin
-        If Textvalue = '' Then
+        If Bit64InputValue = '' Then
             exit;
         Recref.Open(Database::"SDH API Attachment");
         Recref.GetTable(Rec);
         TempBlob.CreateOutStream(TempOutstream);
-        Base64Convert.FromBase64(Textvalue, TempOutstream);
+        Base64Convert.FromBase64(Bit64InputValue, TempOutstream);
 
         TempBlob.ToRecordRef(Recref, Rec.FieldNo(Attachment));
         Recref.SetTable(Rec);
@@ -55,5 +67,21 @@ table 50001 "SDH API Attachment"
             exit;
         Rec.Attachment.CreateInStream(IStream);
         DownloadFromStream(IStream, '', '', '', ExportFileName);
+    end;
+
+    procedure ConvertedTo64Value(): Text
+    var
+        Base64Convert: Codeunit "Base64 Convert";
+        TempInStream: InStream;
+        TempBlob: Codeunit "Temp Blob";
+        Recref: RecordRef;
+    begin
+        Recref.Open(Database::"SDH API Attachment");
+        Recref.GetTable(Rec);
+        TempBlob.FromRecordRef(RecRef, Rec.FieldNo(Attachment));
+        TempBlob.CreateInStream(TempInStream);
+        Recref.SetTable(Rec);
+        Recref.Close();
+        Exit(Base64Convert.ToBase64(TempInStream));
     end;
 }
